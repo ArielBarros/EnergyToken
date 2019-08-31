@@ -1,0 +1,354 @@
+{
+  "contractName": "Marketplace",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.8+commit.23d335f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/ariel/Documentos/blockchain/energytoken/src/contracts/Marketplace.sol\":\"Marketplace\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/ariel/Documentos/blockchain/energytoken/src/contracts/Marketplace.sol\":{\"keccak256\":\"0x768f6c1f606fcbaf17d8fa3e062a89aa9fddd74b76b625a0c3ace54b0ed7f25d\",\"urls\":[\"bzzr://7d5e328ec894fdf565554a58f57c7162d6cd95ee31228d8c260c77b81143ccc0\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506040518060400160405280601e81526020017f5032502074726164696e6720656e65726779206d61726b6574706c61636500008152506000908051906020019061005c929190610062565b50610107565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106100a357805160ff19168380011785556100d1565b828001600101855582156100d1579182015b828111156100d05782518255916020019190600101906100b5565b5b5090506100de91906100e2565b5090565b61010491905b808211156101005760008160009055506001016100e8565b5090565b90565b61017d806101166000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c806306fdde0314610030575b600080fd5b6100386100b3565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561007857808201518184015260208101905061005d565b50505050905090810190601f1680156100a55780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b60008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156101495780601f1061011e57610100808354040283529160200191610149565b820191906000526020600020905b81548152906001019060200180831161012c57829003601f168201915b50505050508156fea165627a7a723058206292221f26a0abca2bf565210a59900a54fa71606b82cd0d71e0ec22d436db920029",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061002b5760003560e01c806306fdde0314610030575b600080fd5b6100386100b3565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561007857808201518184015260208101905061005d565b50505050905090810190601f1680156100a55780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b60008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156101495780601f1061011e57610100808354040283529160200191610149565b820191906000526020600020905b81548152906001019060200180831161012c57829003601f168201915b50505050508156fea165627a7a723058206292221f26a0abca2bf565210a59900a54fa71606b82cd0d71e0ec22d436db920029",
+  "sourceMap": "25:121:6:-;;;73:71;8:9:-1;5:2;;;30:1;27;20:12;5:2;73:71:6;100:39;;;;;;;;;;;;;;;;;:4;:39;;;;;;;;;;;;:::i;:::-;;25:121;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;",
+  "deployedSourceMap": "25:121:6:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;25:121:6;;;;;;;;;;;;;;;;;;;50:18;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;50:18:6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.5.0;\n\ncontract Marketplace {\n  string public name;\n\n  constructor() public {\n    name = \"P2P trading energy marketplace\";\n  }\n}\n",
+  "sourcePath": "/home/ariel/Documentos/blockchain/energytoken/src/contracts/Marketplace.sol",
+  "ast": {
+    "absolutePath": "/home/ariel/Documentos/blockchain/energytoken/src/contracts/Marketplace.sol",
+    "exportedSymbols": {
+      "Marketplace": [
+        794
+      ]
+    },
+    "id": 795,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 783,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:6"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 794,
+        "linearizedBaseContracts": [
+          794
+        ],
+        "name": "Marketplace",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 785,
+            "name": "name",
+            "nodeType": "VariableDeclaration",
+            "scope": 794,
+            "src": "50:18:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_storage",
+              "typeString": "string"
+            },
+            "typeName": {
+              "id": 784,
+              "name": "string",
+              "nodeType": "ElementaryTypeName",
+              "src": "50:6:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_string_storage_ptr",
+                "typeString": "string"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 792,
+              "nodeType": "Block",
+              "src": "94:50:6",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 790,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 788,
+                      "name": "name",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 785,
+                      "src": "100:4:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage",
+                        "typeString": "string storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "hexValue": "5032502074726164696e6720656e65726779206d61726b6574706c616365",
+                      "id": 789,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "107:32:6",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_a1dc4cfcd8f450f552e29ae20df7f115cee58bed4a1c18a75dd53945bc2bdaa9",
+                        "typeString": "literal_string \"P2P trading energy marketplace\""
+                      },
+                      "value": "P2P trading energy marketplace"
+                    },
+                    "src": "100:39:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "id": 791,
+                  "nodeType": "ExpressionStatement",
+                  "src": "100:39:6"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 793,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 786,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "84:2:6"
+            },
+            "returnParameters": {
+              "id": 787,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "94:0:6"
+            },
+            "scope": 794,
+            "src": "73:71:6",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 795,
+        "src": "25:121:6"
+      }
+    ],
+    "src": "0:147:6"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/ariel/Documentos/blockchain/energytoken/src/contracts/Marketplace.sol",
+    "exportedSymbols": {
+      "Marketplace": [
+        794
+      ]
+    },
+    "id": 795,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 783,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:6"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 794,
+        "linearizedBaseContracts": [
+          794
+        ],
+        "name": "Marketplace",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 785,
+            "name": "name",
+            "nodeType": "VariableDeclaration",
+            "scope": 794,
+            "src": "50:18:6",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_storage",
+              "typeString": "string"
+            },
+            "typeName": {
+              "id": 784,
+              "name": "string",
+              "nodeType": "ElementaryTypeName",
+              "src": "50:6:6",
+              "typeDescriptions": {
+                "typeIdentifier": "t_string_storage_ptr",
+                "typeString": "string"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 792,
+              "nodeType": "Block",
+              "src": "94:50:6",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 790,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 788,
+                      "name": "name",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 785,
+                      "src": "100:4:6",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage",
+                        "typeString": "string storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "hexValue": "5032502074726164696e6720656e65726779206d61726b6574706c616365",
+                      "id": 789,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "107:32:6",
+                      "subdenomination": null,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_a1dc4cfcd8f450f552e29ae20df7f115cee58bed4a1c18a75dd53945bc2bdaa9",
+                        "typeString": "literal_string \"P2P trading energy marketplace\""
+                      },
+                      "value": "P2P trading energy marketplace"
+                    },
+                    "src": "100:39:6",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "id": 791,
+                  "nodeType": "ExpressionStatement",
+                  "src": "100:39:6"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 793,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 786,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "84:2:6"
+            },
+            "returnParameters": {
+              "id": 787,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "94:0:6"
+            },
+            "scope": 794,
+            "src": "73:71:6",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 795,
+        "src": "25:121:6"
+      }
+    ],
+    "src": "0:147:6"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.8+commit.23d335f2.Emscripten.clang"
+  },
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0xbA7FC79F6d672907530ec026954De51B5060d8F4",
+      "transactionHash": "0x1b0272cf56232c17779c6a22836131e5da50ffba273fa784d66c9b2c556f8a38"
+    }
+  },
+  "schemaVersion": "3.0.11",
+  "updatedAt": "2019-08-30T03:16:45.638Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

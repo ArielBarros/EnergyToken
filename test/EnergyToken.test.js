@@ -1,6 +1,8 @@
 const EnergyToken = artifacts.require("EnergyToken");
 
-require('chai').should();
+require('chai')
+  .use(require('chai-as-promised'))
+  .should()
 
 contract('EnergyToken', accounts => {
   const _name = 'Energy Token';

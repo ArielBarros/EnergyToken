@@ -1,7 +1,7 @@
 pragma solidity ^0.5.0;
 
 import './EnergyToken.sol';
-import '../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol';
+import '../../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol';
 
 contract EnergyTokenSale {
   using SafeMath for uint256;
