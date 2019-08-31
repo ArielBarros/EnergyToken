@@ -429,7 +429,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 866,
+                          "referencedDeclaration": 1010,
                           "src": "427:3:4",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -907,7 +907,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 866,
+                          "referencedDeclaration": 1010,
                           "src": "427:3:4",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1273,14 +1273,61 @@
   },
   "networks": {
     "5777": {
-      "events": {},
+      "events": {
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event",
+          "signature": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+        },
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event",
+          "signature": "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925"
+        }
+      },
       "links": {},
-      "address": "0xF7Fc431602CD2554e50587e9969f1B06B94E0893",
-      "transactionHash": "0x1a4900d38013336e7da6cac775ca2741d1697c245860b2ea7a117d272bb2a5cc"
+      "address": "0xD92F91E2A9c030430aDE57A0E471cff83e52Dad8",
+      "transactionHash": "0xf9bafe9f8f9bbc2c2395953392c34226a5559f3b9019da31ad2c6ef999af041e"
     }
   },
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-08-30T03:01:54.490Z",
+  "updatedAt": "2019-08-31T20:30:41.460Z",
   "devdoc": {
     "methods": {
       "allowance(address,address)": {
