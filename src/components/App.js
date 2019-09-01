@@ -73,7 +73,7 @@ class App extends Component {
 
   buyProduct(id, price) {
     this.setState({ loading: true });
-    this.state.marketplace.methods.purchaseProduct(id).send({ from: this.state.account, value: price })
+    this.state.marketplace.methods.buyProduct(id).send({ from: this.state.account, value: price })
     .once('receipt', receipt => {
       this.setState({ loading: false });
     });

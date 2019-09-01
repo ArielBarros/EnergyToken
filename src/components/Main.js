@@ -19,6 +19,7 @@ class Main extends Component {
               ref={ input => { this.productAmount = input }}
               className="form-control"
               placeholder="Quantidade de kWh"
+              autoComplete="off"
               required />
           </div>
           <div className="form-group mr-sm-2">
@@ -28,25 +29,29 @@ class Main extends Component {
               ref={ input => { this.productPrice = input }}
               className="form-control"
               placeholder="Preço do kWh"
+              autoComplete="off"
               required />
           </div>
-          <button type="submit" className="btn btn-primary">Vender energia</button>
+          <button type="submit" className="btn btn-success">Vender energia</button>
         </form>
         <p>&nbsp;</p>
         <h2>Comprar Energia</h2>
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Quantidade</th>
-              <th scope="col">Preço</th>
-              <th scope="col">Vendedor</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody id="productList">
-          </tbody>
-        </table>
+        { this.props.products.map((product, key) => 
+          <div className="card mb-5" key={ key }>
+            <h5 className="card-header">#{ product.id.toString() } | Vendedor: { product.owner.toString() } </h5>
+            <div className="card-body">
+              <h5 className="card-title">Quantidade: { product.amount.toString() } kWh</h5>
+              <p className="card-text">Preço: { window.web3.utils.fromWei(product.price.toString(), 'Ether') } ETH</p>
+              <a
+                className="btn btn-primary" 
+                name={ product.id }         
+                value={ product.price }
+                onClick={ event => {
+                  this.props.buyProduct(event.target.name, event.target.value)
+                }}>Comprar</a>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
