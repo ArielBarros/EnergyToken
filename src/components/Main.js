@@ -42,13 +42,13 @@ class Main extends Component {
             <div className="card-body">
               <h5 className="card-title">Quantidade: { product.amount.toString() } kWh</h5>
               <p className="card-text">Preço: { window.web3.utils.fromWei(product.price.toString(), 'Ether') } ETH</p>
-              <a
+              <button
                 className="btn btn-primary" 
                 name={ product.id }         
                 value={ product.price }
                 onClick={ event => {
-                  this.props.buyProduct(event.target.name, event.target.value)
-                }}>Comprar</a>
+                  this.props.buyProduct(event.target.name, event.target.value);
+                }}>Comprar</button>
             </div>
           </div>
         )}
