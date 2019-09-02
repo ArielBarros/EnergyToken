@@ -429,7 +429,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1010,
+                          "referencedDeclaration": 1048,
                           "src": "427:3:4",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -907,7 +907,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1010,
+                          "referencedDeclaration": 1048,
                           "src": "427:3:4",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1272,6 +1272,12 @@
     "version": "0.5.8+commit.23d335f2.Emscripten.clang"
   },
   "networks": {
+    "5000": {
+      "events": {},
+      "links": {},
+      "address": "0xCfEB869F69431e42cdB54A4F4f105C19C080A601",
+      "transactionHash": "0xc1c73bd58a035f6d831c1dc4000e79b8db3f8abd8964e0df3e6ba3cc7c5a4caa"
+    },
     "5777": {
       "events": {
         "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
@@ -1327,7 +1333,7 @@
     }
   },
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-08-31T20:30:41.460Z",
+  "updatedAt": "2019-09-02T02:36:43.624Z",
   "devdoc": {
     "methods": {
       "allowance(address,address)": {
