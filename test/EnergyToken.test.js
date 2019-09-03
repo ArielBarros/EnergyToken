@@ -4,7 +4,7 @@ require('chai')
   .use(require('chai-as-promised'))
   .should()
 
-contract('EnergyToken', ([deployer, buyer]) => {
+contract('EnergyToken', ([deployer, seller, buyer]) => {
   const _name = 'Energy Token';
   const _symbol = 'ETK';
   const _decimals = 18;
@@ -37,7 +37,6 @@ contract('EnergyToken', ([deployer, buyer]) => {
       await energyToken.buyTokens(1, { from: buyer, value: _tokenPrice });
 
       let newBuyerBalance = await energyToken.balanceOf(buyer);
-
       assert.equal(newBuyerBalance.toNumber(), oldBuyerBalance.toNumber() + 1, 'amount is correct');
 
       // Failure: Send not sufficient ether

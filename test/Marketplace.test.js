@@ -29,7 +29,7 @@ contract('Marketplace', ([deployer, seller, buyer]) => {
   describe('products', async () => {
     let result, productCount;
     const amount = 10;
-    const price = web3.utils.toWei('1', 'Ether');
+    const price = 1; // ETK
  
     before(async () => {
       result = await marketplace.createProduct(amount, price, { from: seller });
@@ -62,35 +62,24 @@ contract('Marketplace', ([deployer, seller, buyer]) => {
     });
 
     it('sells products', async () => {
-      let oldSellerBalance = await web3.eth.getBalance(seller);
-      oldSellerBalance = new web3.utils.BN(oldSellerBalance);
-
       // Success
-      result = await marketplace.buyProduct(productCount, { from: buyer, value: price });
-
-      const event = result.logs[0].args;
-      assert.equal(event.id.toNumber(), productCount.toNumber(), 'id is correct');
-      assert.equal(event.amount.toNumber(), amount, 'amount is correct');
-      assert.equal(event.price, price, 'price is correct');
-      assert.equal(event.owner, buyer, 'owner is correct');
-      assert.equal(event.purchased, true, 'purchased is correct');
+      let oldSellerBalance = await marketplace.balanceOf(seller);
+      await marketplace.buyTokens(1, { from: buyer, value: web3.utils.toWei('0.001', 'Ether') });
+      await marketplace.buyProduct(productCount, price, { from: buyer });
 
       // Check that seller received funds
-      let newSellerBalance = await web3.eth.getBalance(seller);
-      newSellerBalance = new web3.utils.BN(newSellerBalance);
+      let newSellerBalance = await marketplace.balanceOf(seller);
 
-      bnPrice = new web3.utils.BN(price);
-      const exepectedBalance = oldSellerBalance.add(bnPrice);
-      assert.equal(newSellerBalance.toString(), exepectedBalance.toString(), 'balance is correct');
+      assert.equal(newSellerBalance.toNumber(), oldSellerBalance.toNumber() + 1, 'balance is correct');
 
       // Failure: Tries to buy a product that does not exist, i.e., product must have valid id
-      await marketplace.buyProduct(10000, { from: buyer, value: web3.utils.toWei('1', 'Ether')}).should.be.rejected;
-      // Failure: Buyer tries to buy without enough ether
-      await marketplace.buyProduct(productCount, { from: buyer, value: web3.utils.toWei('0.5', 'Ether') }).should.be.rejected;
+      await marketplace.buyProduct(10000, price, { from: buyer }).should.be.rejected;
+      // Failure: Buyer tries to buy without enough tokens
+      await marketplace.buyProduct(productCount, price - 1, { from: buyer }).should.be.rejected;
       // Failure: Deployer tries to buy the product, i.e., product can't be purchased twice
-      await marketplace.buyProduct(productCount, { from: deployer, value: web3.utils.toWei('1', 'Ether') }).should.be.rejected;
+      await marketplace.buyProduct(productCount, price, { from: deployer }).should.be.rejected;
       // Failure: Buyer tries to buy again, i.e., buyer can't be the seller
-      await marketplace.buyProduct(productCount, { from: buyer, value: web3.utils.toWei('1', 'Ether') }).should.be.rejected;
+      await marketplace.buyProduct(productCount, price, { from: buyer }).should.be.rejected;
     });
   });
 });
