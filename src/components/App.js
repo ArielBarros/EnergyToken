@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import Web3 from 'web3'
+import Web3 from 'web3';
 import './App.css';
-import Marketplace from '../abis/Marketplace.json'
-import Navbar from './Navbar'
-import Main from './Main'
+import Marketplace from '../abis/Marketplace.json';
+import Navbar from './Navbar';
+import Main from './Main';
+import TokenForm from './TokenForm';
 
 class App extends Component {
 
@@ -34,6 +35,10 @@ class App extends Component {
     if(networkData) {
       const marketplace = web3.eth.Contract(Marketplace.abi, networkData.address);
       this.setState({ marketplace });
+
+      const accountBalance = await marketplace.methods.balanceOf(this.state.account).call();
+      this.setState({ accountBalance: accountBalance.toNumber() });
+
       const productCount = await marketplace.methods.productCount().call()
       this.setState({ productCount });
 
@@ -44,7 +49,7 @@ class App extends Component {
         });
       }
 
-      this.setState({ loading: false});
+      this.setState({ loading: false });
     } else {
       window.alert('Marketplace contract not deployed to that network.')
     }
@@ -52,15 +57,18 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       account: '',
       productCount: 0,
+      accountBalance: 0,
       products: [],
       loading: true
     }
 
     this.createProduct = this.createProduct.bind(this);
     this.buyProduct = this.buyProduct.bind(this);
+    this.buyTokens = this.buyTokens.bind(this);
   }
 
   createProduct(amount, price) {
@@ -73,7 +81,17 @@ class App extends Component {
 
   buyProduct(id, price) {
     this.setState({ loading: true });
-    this.state.marketplace.methods.buyProduct(id).send({ from: this.state.account, value: price })
+    this.state.marketplace.methods.buyProduct(id, price).send({ from: this.state.account })
+    .once('receipt', receipt => {
+      this.setState({ loading: false });
+    });
+  }
+
+  buyTokens(amount) {
+    this.setState({ loading: true });
+    // const tokenPrice = web3.utils.toWei('0.001', 'Ether');
+    const tokenPrice = 1000000000000000;
+    this.state.marketplace.methods.buyTokens(amount).send({ from: this.state.account, value: amount * tokenPrice })
     .once('receipt', receipt => {
       this.setState({ loading: false });
     });
@@ -90,11 +108,17 @@ class App extends Component {
                 ? <div id="loader" className="text-center">
                     <p className="text-center">Carregando dados da blockchain...</p>
                   </div>
-                : <Main 
-                    products={ this.state.products }
-                    createProduct={ this.createProduct }
-                    buyProduct={ this.buyProduct } 
-                  />
+                : <div id="content" className="container">
+                    <TokenForm 
+                      accountBalance={ this.state.accountBalance }
+                      buyTokens={ this.buyTokens } 
+                    />
+                    <Main 
+                      products={ this.state.products }
+                      createProduct={ this.createProduct }
+                      buyProduct={ this.buyProduct } 
+                    />
+                  </div>
               }
             </main>
           </div>

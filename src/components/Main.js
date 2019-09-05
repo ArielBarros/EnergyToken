@@ -4,12 +4,12 @@ class Main extends Component {
 
   render() {
     return (
-      <div id="content" className="container">
+      <div>
         <h1>Vender Energia</h1>
         <form onSubmit={ event => {
           event.preventDefault();
           const amount = this.productAmount.value;
-          const price = window.web3.utils.toWei(this.productPrice.value.toString(), 'Ether');
+          const price = this.productPrice.value.toString();
           this.props.createProduct(amount, price);
         }}>
           <div className="form-group mr-sm-2">
@@ -28,7 +28,7 @@ class Main extends Component {
               type="text"
               ref={ input => { this.productPrice = input }}
               className="form-control"
-              placeholder="Preço do kWh"
+              placeholder="Preço em ETK do kWh"
               autoComplete="off"
               required />
           </div>
@@ -41,7 +41,7 @@ class Main extends Component {
             <h5 className="card-header">#{ product.id.toString() } | Vendedor: { product.owner.toString() } </h5>
             <div className="card-body">
               <h5 className="card-title">Quantidade: { product.amount.toString() } kWh</h5>
-              <p className="card-text">Preço: { window.web3.utils.fromWei(product.price.toString(), 'Ether') } ETH</p>
+              <p className="card-text">Preço: { product.price.toString() } ETK</p>
               <button
                 className="btn btn-primary" 
                 name={ product.id }         
