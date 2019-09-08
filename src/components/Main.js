@@ -28,54 +28,65 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <h1>Vender Energia</h1>
-        <form onSubmit={ this.handleSubmit }>
-          <div className="form-group mr-sm-2">
-            <input
-              id="productAmount"
-              name="productAmount"
-              type="text"
-              value={ this.state.productAmount }
-              onChange={ this.handleChange }
-              className="form-control"
-              placeholder="Quantidade de kWh"
-              autoComplete="off"
-              required />
+        <div className="card mb-5">
+          <h5 className="card-header">Vender Energia</h5>
+          <div className="card-body">
+            <form onSubmit={ this.handleSubmit }>
+              <div className="form-group mr-sm-2">
+                <input
+                  id="productAmount"
+                  name="productAmount"
+                  type="text"
+                  value={ this.state.productAmount }
+                  onChange={ this.handleChange }
+                  className="form-control"
+                  placeholder="Quantidade de kWh"
+                  autoComplete="off"
+                  required />
+              </div>
+              <div className="form-group mr-sm-2">
+                <input
+                  id="productPrice"
+                  name="productPrice"
+                  type="text"
+                  value={ this.state.productPrice }
+                  onChange={ this.handleChange }
+                  className="form-control"
+                  placeholder="Preço em ETK do kWh"
+                  autoComplete="off"
+                  required />
+              </div>
+              <button type="submit" className="btn btn-success">Vender energia</button>
+            </form>
           </div>
-          <div className="form-group mr-sm-2">
-            <input
-              id="productPrice"
-              name="productPrice"
-              type="text"
-              value={ this.state.productPrice }
-              onChange={ this.handleChange }
-              className="form-control"
-              placeholder="Preço em ETK do kWh"
-              autoComplete="off"
-              required />
-          </div>
-          <button type="submit" className="btn btn-success">Vender energia</button>
-        </form>
-        <p>&nbsp;</p>
-        <h2>Comprar Energia</h2>
-        { this.props.products.map((product, key) =>
-          !product.purchased ?
-          <div className="card mb-5" key={ key }>
-            <h5 className="card-header">#{ product.id.toString() } | Vendedor: { product.owner.toString() } </h5>
-            <div className="card-body">
-              <h5 className="card-title">Quantidade: { product.amount.toString() } kWh</h5>
-              <p className="card-text">Preço: { product.price.toString() } ETK</p>
-              <button
-                className="btn btn-primary" 
-                name={ product.id }         
-                value={ product.price }
-                onClick={ event => {
-                  this.props.buyProduct(event.target.name, event.target.value);
-                }}>Comprar</button>
+        </div>
+        <div className="card mb-3">
+          <h4 className="card-header">Comprar Energia</h4>
+          <div className="card-body">
+            <div className="row">
+              { this.props.products.map((product, key) =>
+                !product.purchased ?
+                  <div className="col-6" key={ key }>
+                    <div className="card bg-light mb-5">
+                      <h6 className="card-header">#{ product.id.toString() } | Vendedor: { product.owner.toString() } </h6>
+                      <div className="card-body">
+                        <h5 className="card-title">Quantidade: { product.amount.toString() } kWh</h5>
+                        <p className="card-text">Preço: { product.price.toString() } ETK</p>
+                        <button
+                          className="btn btn-primary" 
+                          name={ product.id }         
+                          value={ product.price }
+                          onClick={ event => {
+                            this.props.buyProduct(event.target.name, event.target.value);
+                          }}>Comprar</button>
+                      </div>
+                    </div>
+                  </div>
+                : null
+              )}
             </div>
           </div>
-          : null
-        )}
+        </div>
       </div>
     );
   }

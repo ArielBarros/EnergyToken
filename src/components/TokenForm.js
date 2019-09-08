@@ -21,23 +21,26 @@ class TokenForm extends Component {
 
   render() {
     return (
-      <div id="content">
-        <p> Your balance is: { this.props.accountBalance } ETK</p>
-        <h1>Comprar Tokens</h1>
-        <form onSubmit={ this.handleSubmit }>
-          <div className="form-group mr-sm-2">
-            <input
-              id="tokensAmount"
-              type="text"
-              value={ this.state.tokensAmount }
-              className="form-control"
-              placeholder="Quantidade de Tokens"
-              onChange={ this.handleChange }
-              autoComplete="off"
-              required />
+      <div>
+        <div className="card mb-5" >
+          <h5 className="card-header">Comprar Tokens | Seu Saldo é: { this.props.accountBalance } ETK</h5>
+          <div className="card-body">
+            <form onSubmit={ this.handleSubmit }>
+              <div className="form-group mr-sm-2">
+                <input
+                  id="tokensAmount"
+                  type="text"
+                  value={ this.state.tokensAmount }
+                  className="form-control"
+                  placeholder="Quantidade de Tokens"
+                  onChange={ this.handleChange }
+                  autoComplete="off"
+                  required />
+              </div>
+              <button type="submit" className="btn btn-success">Comprar tokens</button>
+            </form>
           </div>
-          <button type="submit" className="btn btn-success">Comprar tokens</button>
-        </form>
+        </div>
       </div>
     );
   }
