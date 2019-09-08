@@ -39,14 +39,12 @@ class App extends Component {
       const accountBalance = await marketplace.methods.balanceOf(this.state.account).call();
       this.setState({ accountBalance: accountBalance.toNumber() });
 
-      const productCount = await marketplace.methods.productCount().call()
+      const productCount = await marketplace.methods.productCount().call();
       this.setState({ productCount });
 
       for (var i = 1; i <= productCount; i++) {
         const product = await marketplace.methods.products(i).call();
-        this.setState({
-          products: [...this.state.products, product]
-        });
+        this.setState({ products: [...this.state.products, product] });
       }
 
       this.setState({ loading: false });
