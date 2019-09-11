@@ -26,6 +26,23 @@ contract('Marketplace', ([deployer, seller, buyer]) => {
     });
   });
 
+  describe('Buy tokens', async () => {
+    const _tokenPrice = 1000000000000000;
+    const _numberOfTokens = 1;
+
+    it('1 token selled for a buyer', async () => {
+      // Success
+      let oldBuyerBalance = await marketplace.balanceOf(buyer);
+      await marketplace.buyTokens(_numberOfTokens, { from: buyer, value: _tokenPrice });
+
+      let newBuyerBalance = await marketplace.balanceOf(buyer);
+      assert.equal(newBuyerBalance.toNumber(), oldBuyerBalance.toNumber() + _numberOfTokens, 'amount is correct');
+
+      // Failure: Send not sufficient ether
+      await marketplace.buyTokens(_numberOfTokens, { from: buyer, value: _tokenPrice / 2 }).should.be.rejected;
+    });
+  });
+
   describe('products', async () => {
     let result, productCount;
     const amount = 10;
