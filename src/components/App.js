@@ -4,7 +4,8 @@ import './App.css';
 import Marketplace from '../abis/Marketplace.json';
 import Navbar from './Navbar';
 import Main from './Main';
-import TokenForm from './TokenForm';
+import BuyTokenForm from './BuyTokenForm';
+import SellTokenForm from './SellTokenForm';
 
 class App extends Component {
 
@@ -67,6 +68,7 @@ class App extends Component {
     this.createProduct = this.createProduct.bind(this);
     this.buyProduct = this.buyProduct.bind(this);
     this.buyTokens = this.buyTokens.bind(this);
+    this.sellTokens = this.sellTokens.bind(this);
   }
 
   createProduct(amount, price) {
@@ -95,22 +97,37 @@ class App extends Component {
     });
   }
 
+  sellTokens(amount) {
+    this.setState({ loading: true });
+    this.state.marketplace.methods.sellTokens(amount).send({ from: this.state.account })
+    .once('receipt', receipt => {
+      this.setState({ loading: false });
+    });
+  }
+
   render() {
     return (
       <div>
-        <Navbar account={ this.state.account } />
+        <Navbar 
+          account={ this.state.account }
+          accountBalance={this.state.accountBalance }
+        />
         <div className="container-fluid mt-5">
           <div className="row">
-            <main role="main" className="col-lg-12 d-flex">
+            <main role="main" className="col-lg-12 d-flex mt-5">
               { this.state.loading
                 ? <div id="loader" className="text-center">
                     <p className="text-center">Carregando dados da blockchain...</p>
                   </div>
                 : <div id="content" className="container">
-                    <TokenForm 
-                      accountBalance={ this.state.accountBalance }
-                      buyTokens={ this.buyTokens } 
-                    />
+                    <div className="row">
+                      <div className="col">
+                        <BuyTokenForm buyTokens={ this.buyTokens } />
+                      </div>
+                      <div className="col">
+                        <SellTokenForm sellTokens={ this.sellTokens } />
+                      </div>
+                    </div>
                     <Main 
                       products={ this.state.products }
                       createProduct={ this.createProduct }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class TokenForm extends Component {
+class SellTokenForm extends Component {
   constructor(props) {
     super(props);
     this.state = { tokensAmount: '' };
@@ -16,14 +16,14 @@ class TokenForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const amount = this.state.tokensAmount;
-    this.props.buyTokens(amount);
+    this.props.sellTokens(amount);
   }
 
   render() {
     return (
       <div>
         <div className="card mb-5" >
-          <h5 className="card-header">Comprar Tokens | Seu Saldo é: { this.props.accountBalance } ETK</h5>
+          <h5 className="card-header text-center">Vender Tokens</h5>
           <div className="card-body">
             <form onSubmit={ this.handleSubmit }>
               <div className="form-group mr-sm-2">
@@ -37,7 +37,7 @@ class TokenForm extends Component {
                   autoComplete="off"
                   required />
               </div>
-              <button type="submit" className="btn btn-success">Comprar tokens</button>
+              <button type="submit" className="btn btn-danger">Vender</button>
             </form>
           </div>
         </div>
@@ -46,4 +46,4 @@ class TokenForm extends Component {
   }
 }
 
-export default TokenForm;
+export default SellTokenForm;
