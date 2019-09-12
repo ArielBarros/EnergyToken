@@ -26,20 +26,39 @@ contract('Marketplace', ([deployer, seller, buyer]) => {
     });
   });
 
-  describe('Buy tokens', async () => {
-    const _tokenPrice = 1000000000000000;
-    const _numberOfTokens = 1;
+  describe('Trade tokens', async () => {
+    // const _tokenPrice = 1000000000000000;
+    const _tokenPrice = web3.utils.toWei('0.001', 'Ether');
+    const _numberOfTokens = 2;
 
-    it('1 token selled for a buyer', async () => {
+    it('1 token buyed by the buyer', async () => {
       // Success
       let oldBuyerBalance = await marketplace.balanceOf(buyer);
-      await marketplace.buyTokens(_numberOfTokens, { from: buyer, value: _tokenPrice });
+      await marketplace.buyTokens(_numberOfTokens, { from: buyer, value: _numberOfTokens * _tokenPrice });
 
       let newBuyerBalance = await marketplace.balanceOf(buyer);
       assert.equal(newBuyerBalance.toNumber(), oldBuyerBalance.toNumber() + _numberOfTokens, 'amount is correct');
 
       // Failure: Send not sufficient ether
-      await marketplace.buyTokens(_numberOfTokens, { from: buyer, value: _tokenPrice / 2 }).should.be.rejected;
+      await marketplace.buyTokens(_numberOfTokens, { from: buyer, value: _numberOfTokens * _tokenPrice / 2 }).should.be.rejected;
+    });
+
+    it('1 token selled by the buyer', async () => {
+      // Success
+      let oldBuyerBalance = await web3.eth.getBalance(buyer);
+      oldBuyerBalance = new web3.utils.BN(oldBuyerBalance);
+
+      await marketplace.sellTokens(_numberOfTokens, { from: buyer });
+
+      let newBuyerBalance = await web3.eth.getBalance(buyer);
+      newBuyerBalance = new web3.utils.BN(newBuyerBalance);
+
+      let _totalGasPriceUsed = web3.utils.toWei('0.000575', 'Ether'); // 575000000000000
+      _totalGasPriceUsed = new web3.utils.BN(_totalGasPriceUsed); 
+      const _tokenPriceBN = new web3.utils.BN(_tokenPrice);
+      const expectedBalance = oldBuyerBalance.add(_tokenPriceBN.mul(new web3.utils.BN(_numberOfTokens))).sub(_totalGasPriceUsed);
+
+      assert.equal(newBuyerBalance.toString(), expectedBalance.toString(), 'amount is correct');
     });
   });
 

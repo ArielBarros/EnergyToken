@@ -10,7 +10,8 @@ contract Marketplace is ERC20, ERC20Detailed {
 
   mapping(uint => Product) public products;
 
-  event Sell(address _buyer, uint256 _amount);
+  event Buy(address _buyer, uint256 _amount);
+  event Sell(address _seller, uint256 _amount);
 
   struct Product {
     uint id;
@@ -79,6 +80,15 @@ contract Marketplace is ERC20, ERC20Detailed {
     require(msg.value == _numberOfTokens.mul(tokenPrice), "Not suficient ether");
     _mint(msg.sender, _numberOfTokens);
 
-    emit Sell(msg.sender, _numberOfTokens);
+    emit Buy(msg.sender, _numberOfTokens);
+  }
+
+  function sellTokens(uint256 _numberOfTokens) public payable {
+    address payable _seller = msg.sender;
+    uint etherValue = _numberOfTokens.mul(tokenPrice);
+    address(_seller).transfer(etherValue);
+    _burn(_seller, _numberOfTokens);
+
+    emit Sell(_seller, _numberOfTokens);
   }
 }
