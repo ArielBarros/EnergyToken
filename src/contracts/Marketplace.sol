@@ -33,6 +33,7 @@ contract Marketplace is ERC20, ERC20Detailed {
     uint id,
     uint amount,
     uint price,
+    address payable seller,
     address payable owner,
     bool purchased
   );
@@ -73,7 +74,7 @@ contract Marketplace is ERC20, ERC20Detailed {
     products[_id] = _product;
     transfer(_seller, value);
 
-    emit ProductPurchased(productCount, _product.amount, _product.price, _product.owner, _product.purchased);
+    emit ProductPurchased(_product.id, _product.amount, _product.price, _seller, _product.owner, _product.purchased);
   }
 
   function buyTokens(uint256 _numberOfTokens) public payable {

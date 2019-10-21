@@ -9,7 +9,10 @@ eventListener = async () => {
   
   console.log('Listening events...');
   marketplace.events.Buy().on('data', event => {
-    console.log('Evento data')
+    console.log(event);
+  });
+
+  marketplace.events.ProductPurchased().on('data', event => {
     console.log(event);
   });
 }
