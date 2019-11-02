@@ -1,5 +1,5 @@
 const Web3 = require('web3');
-const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:7545'));
+const web3 = new Web3(new Web3.providers.WebsocketProvider('wss://ropsten.infura.io/ws'));
 const Marketplace = require('./abis/Marketplace.json');
 
 eventListener = async () => {
