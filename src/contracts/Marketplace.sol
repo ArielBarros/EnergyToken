@@ -7,6 +7,7 @@ contract Marketplace is ERC20, ERC20Detailed {
   uint public productCount = 0;
   uint256 public tokenPrice;
   address public owner;
+  address public utilityCompany;
 
   mapping(uint => Product) public products;
 
@@ -43,10 +44,12 @@ contract Marketplace is ERC20, ERC20Detailed {
     string memory _symbol,
     uint8 _decimals,
     uint256 _initialSupply,
-    uint256 _tokenPrice
+    uint256 _tokenPrice,
+    address _utilityCompany
   ) ERC20Detailed(_name, _symbol, _decimals) public {
     owner = msg.sender;
     tokenPrice = _tokenPrice;
+    utilityCompany = _utilityCompany;
     _mint(owner, _initialSupply);
   }
 
@@ -72,7 +75,12 @@ contract Marketplace is ERC20, ERC20Detailed {
     _product.owner = msg.sender;
     _product.purchased = true;
     products[_id] = _product;
-    transfer(_seller, value);
+
+    uint256 utilityCompanyFee = value.div(4);
+    uint256 netPrice = value.sub(utilityCompanyFee);
+
+    transfer(utilityCompany, utilityCompanyFee);
+    transfer(_seller, netPrice);
 
     emit ProductPurchased(_product.id, _product.amount, _product.price, _seller, _product.owner, _product.purchased);
   }
