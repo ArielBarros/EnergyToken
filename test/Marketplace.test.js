@@ -4,7 +4,7 @@ require('chai')
   .use(require('chai-as-promised'))
   .should();
 
-contract('Marketplace', ([deployer, seller, buyer]) => {
+contract('Marketplace', ([deployer, seller, buyer, utilityCompany]) => {
   let marketplace;
 
   before(async () => {
@@ -27,8 +27,7 @@ contract('Marketplace', ([deployer, seller, buyer]) => {
   });
 
   describe('Trade tokens', async () => {
-    // const _tokenPrice = 1000000000000000;
-    const _tokenPrice = web3.utils.toWei('0.001', 'Ether');
+    const _tokenPrice = web3.utils.toWei('0.001', 'Ether'); // 1000000000000000
     const _numberOfTokens = 2;
 
     it('1 token buyed by the buyer', async () => {
@@ -53,7 +52,7 @@ contract('Marketplace', ([deployer, seller, buyer]) => {
       let newBuyerBalance = await web3.eth.getBalance(buyer);
       newBuyerBalance = new web3.utils.BN(newBuyerBalance);
 
-      let _totalGasPriceUsed = web3.utils.toWei('0.000575', 'Ether'); // 575000000000000
+      let _totalGasPriceUsed = web3.utils.toWei('0.00057456', 'Ether'); // 574560000000000
       _totalGasPriceUsed = new web3.utils.BN(_totalGasPriceUsed); 
       const _tokenPriceBN = new web3.utils.BN(_tokenPrice);
       const expectedBalance = oldBuyerBalance.add(_tokenPriceBN.mul(new web3.utils.BN(_numberOfTokens))).sub(_totalGasPriceUsed);
@@ -65,8 +64,9 @@ contract('Marketplace', ([deployer, seller, buyer]) => {
   describe('products', async () => {
     let result, productCount;
     const amount = 10;
-    const price = 1; // ETK
- 
+    const price = 4; // ETK
+    const utilityFee = 0.25 // 25% of product price
+
     before(async () => {
       result = await marketplace.createProduct(amount, price, { from: seller });
       productCount = await marketplace.productCount();
@@ -100,13 +100,18 @@ contract('Marketplace', ([deployer, seller, buyer]) => {
     it('sells products', async () => {
       // Success
       let oldSellerBalance = await marketplace.balanceOf(seller);
-      await marketplace.buyTokens(1, { from: buyer, value: web3.utils.toWei('0.001', 'Ether') });
+      let oldUtilityCompanyBalance = await marketplace.balanceOf(utilityCompany);
+
+      await marketplace.buyTokens(price, { from: buyer, value: web3.utils.toWei(('0.001' * price).toString(), 'Ether') });
       await marketplace.buyProduct(productCount, price, { from: buyer });
 
-      // Check that seller received funds
+      // Check if seller received funds
       let newSellerBalance = await marketplace.balanceOf(seller);
+      assert.equal(newSellerBalance.toNumber(), oldSellerBalance.toNumber() + price * (1 - utilityFee), 'balance is correct');
 
-      assert.equal(newSellerBalance.toNumber(), oldSellerBalance.toNumber() + 1, 'balance is correct');
+      // Check if utility company received the fee
+      let newUtilityCompanyBalance = await marketplace.balanceOf(utilityCompany);
+      assert.equal(newUtilityCompanyBalance.toNumber(), oldUtilityCompanyBalance.toNumber() + price * utilityFee, 'balance is correct');
 
       // Failure: Tries to buy a product that does not exist, i.e., product must have valid id
       await marketplace.buyProduct(10000, price, { from: buyer }).should.be.rejected;
