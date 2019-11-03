@@ -15,5 +15,4 @@ config/development/*.sol.js
 config/test/contracts.json
 build
 dist
-src/abis/
 .env
