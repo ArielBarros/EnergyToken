@@ -10,18 +10,23 @@ import SellTokenForm from './SellTokenForm';
 class App extends Component {
 
   async componentWillMount() {
-    await this.loadWeb3();
-    await this.loadBlockchainData();
+    const result = await this.loadWeb3();
+    if(result) {
+      await this.loadBlockchainData();
+    }
   }
 
   async loadWeb3() {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
       await window.ethereum.enable();
+      return true;
     } else if (window.web3) {
       window.web3 = new Web3(window.web3.currentProvider);
+      return true;
     } else {
-      window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
+      window.alert('Navegador não compatível com Ethereum. Você deve instalar o Metamask!');
+      return false;
     }
   }
 
@@ -50,7 +55,7 @@ class App extends Component {
 
       this.setState({ loading: false });
     } else {
-      window.alert('Marketplace contract not deployed to that network.')
+      window.alert('O contrato Marketplace não foi hospedado nessa rede!')
     }
   }
 
